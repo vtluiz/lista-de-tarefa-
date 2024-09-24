@@ -1,0 +1,6 @@
+# Ignorar arquivos de compilação e dependências
+__pycache__/
+*.pyc
+
+# Ignorar arquivo de tarefas
+tarefas.txt
