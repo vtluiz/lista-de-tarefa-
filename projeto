@@ -1,0 +1,81 @@
+# Funções para adicionar, listar e remover tarefas
+def adicionar_tarefa(tarefas, tarefa):
+    tarefas.append(tarefa)
+    print(f'Tarefa "{tarefa}" adicionada com sucesso!')
+
+def listar_tarefas(tarefas):
+    if tarefas:
+        print("\nLista de Tarefas:")
+        for i, tarefa in enumerate(tarefas, 1):
+            print(f"{i}. {tarefa}")
+    else:
+        print("\nA lista de tarefas está vazia.")
+
+def remover_tarefa(tarefas, indice):
+    if 0 <= indice < len(tarefas):
+        tarefa = tarefas.pop(indice)
+        print(f'Tarefa "{tarefa}" removida com sucesso!')
+    else:
+        print("Índice inválido! Tente novamente.")
+
+def salvar_tarefas(tarefas, arquivo):
+    with open(arquivo, 'w') as f:
+        for tarefa in tarefas:
+            f.write(tarefa + '\n')
+    print(f"Tarefas salvas no arquivo '{arquivo}' com sucesso!")
+
+def carregar_tarefas(arquivo):
+    try:
+        with open(arquivo, 'r') as f:
+            tarefas = [linha.strip() for linha in f.readlines()]
+        print(f"Tarefas carregadas do arquivo '{arquivo}'.")
+        return tarefas
+    except FileNotFoundError:
+        print(f"Arquivo '{arquivo}' não encontrado. Criando nova lista.")
+        return []
+
+# Menu principal
+def menu():
+    print("\n---- Lista de Tarefas ----")
+    print("1. Adicionar Tarefa")
+    print("2. Listar Tarefas")
+    print("3. Remover Tarefa")
+    print("4. Salvar Tarefas")
+    print("5. Carregar Tarefas")
+    print("6. Sair")
+    return input("Escolha uma opção: ")
+
+def main():
+    tarefas = []
+    arquivo = "tarefas.txt"
+    
+    while True:
+        opcao = menu()
+        
+        if opcao == '1':
+            tarefa = input("Digite a nova tarefa: ")
+            adicionar_tarefa(tarefas, tarefa)
+        
+        elif opcao == '2':
+            listar_tarefas(tarefas)
+        
+        elif opcao == '3':
+            listar_tarefas(tarefas)
+            indice = int(input("Digite o número da tarefa para remover: ")) - 1
+            remover_tarefa(tarefas, indice)
+        
+        elif opcao == '4':
+            salvar_tarefas(tarefas, arquivo)
+        
+        elif opcao == '5':
+            tarefas = carregar_tarefas(arquivo)
+        
+        elif opcao == '6':
+            print("Saindo...")
+            break
+        
+        else:
+            print("Opção inválida! Tente novamente.")
+
+if __name__ == "__main__":
+    main()
