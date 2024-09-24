@@ -1,0 +1,8 @@
+projeto-lista-tarefas/
+│
+├── src/
+│   └── lista_tarefas.py
+│
+├── README.md
+├── .gitignore
+└── tarefas.txt
